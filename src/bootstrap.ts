@@ -7,7 +7,8 @@ import { createLogger } from "./packages/logger";
 
 export function bootstrap() {
   const config = createConfig({
-    dynamoDbTableName: process.env.DYNAMODB_TABLE_NAME,
+    cacheTableName: process.env.DYNAMODB_CACHE_TABLE_NAME,
+    singleTableName: process.env.DYNAMODB_SINGLE_TABLE_NAME,
     swapiUrl: 'https://swapi.py4e.com/api',
     moviedbUrl: 'https://api.themoviedb.org/3',
     moviedbApiToken: process.env.MOVIEDB_API_TOKEN,
@@ -28,7 +29,7 @@ export function bootstrap() {
     }),
     keyv: createKeyv({
       dynamoOptions: {
-        tableName: config.dynamoDbTableName,
+        tableName: config.cacheTableName,
       },
       logger: logger,
       namespace: 'keyv',

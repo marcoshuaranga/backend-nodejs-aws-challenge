@@ -12,8 +12,10 @@ export class DynamoDBStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props: DynamoDBStackProps) {
     super(scope, id, props);
 
-    this.table = new Table(this, props.tableName, {
+    this.table = new Table(this, id, {
+      tableName: props.tableName,
       partitionKey: { name: 'id', type: AttributeType.STRING },
+      removalPolicy: cdk.RemovalPolicy.DESTROY,
     });
   }
 }

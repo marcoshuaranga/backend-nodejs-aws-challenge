@@ -7,13 +7,18 @@ import { DynamoDBStack } from '../stack/dynamodb';
 const app = new cdk.App();
 
 const env = { account: process.env.CDK_DEFAULT_ACCOUNT, region: process.env.CDK_DEFAULT_REGION };
-const _ = new DynamoDBStack(app, 'CacheDynamoStack', {
+const cacheTable = new DynamoDBStack(app, 'CacheDynamoStack', {
   tableName: 'CacheTable',
 });
 
+const singleTable = new DynamoDBStack(app, 'SingleTableStack', {
+  tableName: 'SingleTable',
+});
+
 const mainLambda = new LambdaStack(app, 'MainStack', {
+  cacheDynamoTable: cacheTable.table,
+  singleDynamoTable: singleTable.table,
   environment: {
-    DYNAMODB_TABLE_NAME: 'CacheTable',
     MOVIEDB_API_TOKEN: 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwZThjMWI2NjU0ZTdjNzNiNzcyNmIxMmMxNWI4OGI2NyIsIm5iZiI6MTc1NjM1NTI0NC43Mjk5OTk4LCJzdWIiOiI2OGFmZGFhYzQ2MzQwZTZjMTMwZjhmY2MiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.J2Vuislf3cd0ZkpdzMcN36EQRsScS-gjqNKCx9k9rcA',
   },
   entry: 'src/main.ts',

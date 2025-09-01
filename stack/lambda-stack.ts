@@ -3,12 +3,17 @@ import { Construct } from 'constructs';
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
 import { Architecture, Runtime, Tracing } from 'aws-cdk-lib/aws-lambda';
 import { LogGroup, RetentionDays } from 'aws-cdk-lib/aws-logs';
+import { ITable } from 'aws-cdk-lib/aws-dynamodb';
 
 export interface LambdaStackProps extends cdk.StackProps {
   entry: string;
 
-  environment?: {
-    [key: string]: string;
+  cacheDynamoTable: ITable;
+
+  singleDynamoTable: ITable;
+
+  environment: {
+    MOVIEDB_API_TOKEN: string;
   };
 }
 
@@ -37,7 +42,11 @@ export class LambdaStack extends cdk.Stack {
         removalPolicy: cdk.RemovalPolicy.DESTROY,
       }),
       tracing: Tracing.ACTIVE,
-      environment: props?.environment,
+      environment: {
+        DYNAMODB_CACHE_TABLE_NAME: props.cacheDynamoTable.tableName,
+        DYNAMODB_SINGLE_TABLE_NAME: props.singleDynamoTable.tableName,
+        MOVIEDB_API_TOKEN: props.environment.MOVIEDB_API_TOKEN,
+      },
     });
   }
 }

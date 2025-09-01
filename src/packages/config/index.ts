@@ -5,7 +5,8 @@ const configSchema = z.object({
   swapiUrl: z.string().check(z.url()),
   moviedbUrl: z.string().check(z.url()),
   moviedbApiToken: z.string().check(z.minLength(32)),
-  dynamoDbTableName: z.optional(z.string().check(z.minLength(3)))
+  cacheTableName: z.optional(z.string().check(z.minLength(3))),
+  singleTableName: z.optional(z.string().check(z.minLength(3)))
 });
 
 export type Config = z.infer<typeof configSchema>;

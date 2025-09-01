@@ -5,7 +5,7 @@ import { zValidator } from '@hono/zod-validator';
 const BodySchema = z.object({
   pokemon: z.object({
     name: z.string().min(2).max(100),
-    type: z.enum(['fire', 'water', 'grass']),
+    type: z.enum(['fire', 'water', 'grass', 'electric']),
     level: z.number().min(1).max(100),
   }).openapi({
     example: {

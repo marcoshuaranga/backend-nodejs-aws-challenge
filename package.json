@@ -1,0 +1,38 @@
+{
+  "name": "backend-nodejs-aws-challenge",
+  "description": "Backend Node.js AWS Challenge",
+  "version": "0.1.0",
+  "bin": {
+    "backend-nodejs-aws-challenge": "bin/backend-nodejs-aws-challenge.js"
+  },
+  "scripts": {
+    "test": "jest",
+    "cdk": "cdk"
+  },
+  "devDependencies": {
+    "@aws-sdk/client-dynamodb": "^3.878.0",
+    "@aws-sdk/lib-dynamodb": "^3.878.0",
+    "@types/aws-lambda": "^8.10.152",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^22.7.9",
+    "aws-cdk": "2.1027.0",
+    "aws-cdk-lib": "^2.211.0",
+    "constructs": "^10.4.2",
+    "esbuild": "^0.25.9",
+    "jest": "^30.1.1",
+    "ts-jest": "^29.4.1",
+    "ts-node": "^10.9.2",
+    "typescript": "~5.9.2"
+  },
+  "dependencies": {
+    "@better-fetch/fetch": "^1.1.18",
+    "@hono/swagger-ui": "^0.5.2",
+    "@hono/zod-openapi": "^1.1.0",
+    "@hono/zod-validator": "^0.7.2",
+    "@keyv/dynamo": "^1.0.1",
+    "dynamodb-toolbox": "^2.7.1",
+    "hono": "^4.9.5",
+    "keyv": "^5.5.0",
+    "zod": "^4.1.5"
+  }
+}

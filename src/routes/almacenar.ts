@@ -21,7 +21,7 @@ const BodySchema = z.object({
 const ResponseSchema = z.object({
   id: z.uuid(),
   name: z.string().min(2).max(100),
-  type: z.enum(['fire', 'water', 'grass']),
+  type: z.enum(['fire', 'water', 'grass', 'electric']),
   level: z.number().min(1).max(100),
 }).openapi('Pokemon')
 

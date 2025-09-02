@@ -4,6 +4,8 @@ import { Construct } from 'constructs';
 
 export interface DynamoDBStackProps extends cdk.StackProps {
   tableName: string;
+  partitionKey: { name: string; type: AttributeType };
+  sortKey?: { name: string; type: AttributeType };
 }
 
 export class DynamoDBStack extends cdk.Stack {
@@ -14,7 +16,8 @@ export class DynamoDBStack extends cdk.Stack {
 
     this.table = new Table(this, id, {
       tableName: props.tableName,
-      partitionKey: { name: 'id', type: AttributeType.STRING },
+      partitionKey: props.partitionKey,
+      sortKey: props.sortKey,
       removalPolicy: cdk.RemovalPolicy.DESTROY,
     });
   }

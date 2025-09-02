@@ -34,6 +34,7 @@ const ResponseSchema = z.object({
   items: z.array(z.object({
     id: z.uuid(),
     ip: z.ipv4(),
+    path: z.string(),
     response: z.any(),
     createdAt: z.string().regex(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z$/),
   })).openapi({

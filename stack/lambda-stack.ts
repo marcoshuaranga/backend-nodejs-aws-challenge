@@ -48,5 +48,11 @@ export class LambdaStack extends cdk.Stack {
         MOVIEDB_API_TOKEN: props.environment.MOVIEDB_API_TOKEN,
       },
     });
+
+    props.cacheDynamoTable.grantReadWriteData(this.fn);
+    props.singleDynamoTable.grantReadWriteData(this.fn);
+
+    props.cacheDynamoTable.grant(this.fn, 'dynamodb:DescribeTable');
+    props.singleDynamoTable.grant(this.fn, 'dynamodb:DescribeTable');
   }
 }
